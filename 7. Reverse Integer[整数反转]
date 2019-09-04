@@ -31,7 +31,7 @@ Answer2:
 class Solution:
     def reverse(self, x: int) -> int:
         b = str(x).replace('-','')
-        c = int(''.join([i for i in [i for i in b][::-1]]))*(-1 if x<0 else 1)
+        c = int(b[::-1])*(-1 if x<0 else 1)
         return c if c>=pow(-2,31) and c<=(pow(2,31) - 1) else 0
 思路：
     把整数转化为list然后再根据list的反转函数直接反转，判断大小值返回即可
