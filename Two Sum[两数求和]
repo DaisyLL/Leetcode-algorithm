@@ -13,3 +13,14 @@ Answer:
              for i, v in enumerate(nums):
                  if (target - v ) in num and i != nums.index(target - v):
                       return [i, nums.index(target - v)]
+
+## 主要思路：
+   使用set 和 迭代器迭代列表，时间复杂度O(n).
+   最开始使用了for 循环暴力解决，时间复杂付O(n^2),在leetcode提交会超出时间限制，python中有很多简单的函数可以使用，还是要多使用
+ class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        for i in range(len(nums)):
+            for j in range(len(nums)):
+                if i != j:
+                    if int(nums[i]) + int(nums[j]) == target:
+                        return [i, j]
