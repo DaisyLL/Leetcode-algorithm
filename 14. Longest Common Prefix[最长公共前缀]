@@ -1,0 +1,33 @@
+##########################################################################################################################################
+quenstion:
+Write a function to find the longest common prefix string amongst an array of strings.
+
+If there is no common prefix, return an empty string "".
+
+Example 1:
+
+Input: ["flower","flow","flight"]
+Output: "fl"
+Example 2:
+
+Input: ["dog","racecar","car"]
+Output: ""
+Explanation: There is no common prefix among the input strings.
+https://leetcode-cn.com/problems/longest-common-prefix
+
+##########################################################################################################################################
+Answer:
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        if len(strs) <=1:
+            return '' if len(strs)==0 else strs[0]
+        else:
+            a = sorted([len(i) for i in strs])[0]
+            b = 0
+            for i in range(1,a+1):
+                if len(set([info[:i] for info in strs])) == 1:
+                    b += 1
+            return strs[0][:b] if b>0 else ''
+主要思路：1. 最长公共前缀的长度肯定不会列表中长度最短元素的长度。可以先利用sorted 和len函数找到公共函数最大长度
+         2. 找到最大长度后利用循环判断每个元素的前几个值组成的去重列表长度是否为1，如果为1继续直到不为1，这个索引就是我们需要的最大长度截止索引
+         其中远输入的特殊情况要考虑到，比如只有1个值或者列表为空
