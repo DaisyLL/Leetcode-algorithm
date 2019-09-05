@@ -31,3 +31,28 @@ class Solution:
 主要思路：1. 最长公共前缀的长度肯定不会列表中长度最短元素的长度。可以先利用sorted 和len函数找到公共函数最大长度
          2. 找到最大长度后利用循环判断每个元素的前几个值组成的去重列表长度是否为1，如果为1继续直到不为1，这个索引就是我们需要的最大长度截止索引
          其中远输入的特殊情况要考虑到，比如只有1个值或者列表为空
+##########################################################################################################################################
+在评论中看到两个解法很是简单，主要是zip函数 和enumerate函数，这两个函数可以代替大部分暴力解决方法，明细如下：
+
+1. Python里字符串是可以比较的，按照ascII值排，举例abb， aba，abac，最大为abb，最小为aba。所以只需要比较最大最小的公共前缀就是整个数组的公共前缀
+
+    def longestCommonPrefix(self, strs):
+        if not strs: return ""
+        s1 = min(strs)
+        s2 = max(strs)
+        for i,x in enumerate(s1):
+            if x != s2[i]:
+                return s2[:i]
+        return s1
+2、利用python的zip函数，把str看成list然后把输入看成二维数组，左对齐纵向压缩，然后把每项利用集合去重，之后遍历list中找到元素长度大于1之前的就是公共前缀
+
+    def longestCommonPrefix(self, strs):
+        if not strs: return ""
+        ss = list(map(set, zip(*strs)))
+        res = ""
+        for i, x in enumerate(ss):
+            x = list(x)
+            if len(x) > 1:
+                break
+            res = res + x[0]
+        return res
