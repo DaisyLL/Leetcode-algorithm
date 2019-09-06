@@ -1,0 +1,26 @@
+#######################################################################################################################################
+Implement strStr().
+
+Return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+
+Example 1:
+
+Input: haystack = "hello", needle = "ll"
+Output: 2
+Example 2:
+
+Input: haystack = "aaaaa", needle = "bba"
+Output: -1
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/implement-strstr
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+#######################################################################################################################################
+
+这题直接用index 就结束了。。。
+class Solution:
+    def strStr(self, haystack: str, needle: str) -> int:
+        try: 
+            return haystack.index(needle)
+        except:
+            return -1
