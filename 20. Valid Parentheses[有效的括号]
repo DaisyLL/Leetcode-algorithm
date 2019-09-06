@@ -1,0 +1,40 @@
+########################################################################################################################################
+Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+
+An input string is valid if:
+
+Open brackets must be closed by the same type of brackets.
+Open brackets must be closed in the correct order.
+Note that an empty string is also considered valid.
+
+https://leetcode-cn.com/problems/valid-parentheses
+
+#########################################################################################################################################
+这道题我自己写的既复杂又会有意料不到的case判断失误，看了下评论，挑出比较好的方式
+#########################################################################################################################################
+Solution1 :
+这个很简单粗暴，原理就是不断的替换掉闭合正确的括号，如果最后还有剩余，就代表肯定存在不匹配的括号。缺点就是耗时比较长
+class Solution:
+    def isValid(self, s):
+        while '{}' in s or '()' in s or '[]' in s:
+            s = s.replace('{}', '')
+            s = s.replace('[]', '')
+            s = s.replace('()', '')
+        return s == ''
+Solution2:
+这个很好理解，作者也写了思路，简单易懂效率高
+class Solution:
+    def isValid(self, s: str) -> bool:
+        dic = {'(':1,')':-1,'[':2,']':-2,'{':3,'}':-3} #定义一个符号字典，给每对符号赋相反的两个值，方便计算是否为配对符号
+        stack = [] #搞个栈
+        for sym in s:
+            if dic[sym] > 0: #>0意味着是左符号
+                stack.append(sym) #左符号随便写永远不会错，统统压到栈内
+            else: #<0则意味着是右符号
+                if not stack: #如果栈里啥都没有就想压入右符号是不被允许的
+                    return False
+                if dic[stack[-1]] + dic[sym] == 0: #如果当前符号跟上一个符号的和为0，则意味着是配对的，则弹出上一个符号
+                    stack.pop()
+                else:
+                    return False #不配对还得了？赶紧结束吧！
+        return not stack
