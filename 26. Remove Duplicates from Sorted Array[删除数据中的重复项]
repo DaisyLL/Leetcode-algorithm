@@ -35,4 +35,9 @@ class Solution:
             i += 1
         nums[0:len(set(nums))] = sorted(nums[0:len(set(nums))])
         return len(set(nums))
-这个例子使用到了set函数，不知道这个算不算使用了额外的数组空间，
+这个例子使用到了set函数，不知道这个算不算使用了额外的数组空间，这个例子我觉得有点点重复了，我改了下如下：
+class Solution:
+    def removeDuplicates(self, nums: List[int]) -> int:
+        a = len(set(nums))
+        nums[0:len(set(nums))] = sorted(set(nums))
+        return a
