@@ -1,0 +1,38 @@
+###########################################################################################################################################
+Given a sorted array nums, remove the duplicates in-place such that each element appear only once and return the new length.
+
+Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.
+
+Example 1:
+
+Given nums = [1,1,2],
+
+Your function should return length = 2, with the first two elements of nums being 1 and 2 respectively.
+
+It doesn't matter what you leave beyond the returned length.
+
+https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array
+
+##########################################################################################################################################
+Answer:
+class Solution:
+    def removeDuplicates(self, nums: List[int]) -> int:
+        b = len(nums)
+        for i in range(len(nums)):
+            a = nums[:b].count(nums[i])
+            if a > 1:
+                b = b- (a-1)
+                nums[i+1:b] = nums[i+a:a+b-1]
+        return(b)
+但是超时了，超时的列子我在本地跑了一下是OK的
+
+##########################################################################################################################################
+class Solution:
+    def removeDuplicates(self, nums: List[int]) -> int:
+        i = 0
+        for x in set(nums):
+            nums[i] = x
+            i += 1
+        nums[0:len(set(nums))] = sorted(nums[0:len(set(nums))])
+        return len(set(nums))
+这个例子使用到了set函数，不知道这个算不算使用了额外的数组空间，
