@@ -1,0 +1,20 @@
+############################################################################################################################################
+Given a string s consists of upper/lower-case alphabets and empty space characters ' ', return the length of last word in the string.
+
+If the last word does not exist, return 0.
+
+Note: A word is defined as a character sequence consists of non-space characters only.
+
+Example:
+
+Input: "Hello World"
+Output: 5
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/length-of-last-word
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+#########################################################################################################################################
+python 有太多的函数可以用，就导致这个题异常的简单....
+class Solution:
+    def lengthOfLastWord(self, s: str) -> int:
+        return(len(s.strip().split(' ')[-1]))
