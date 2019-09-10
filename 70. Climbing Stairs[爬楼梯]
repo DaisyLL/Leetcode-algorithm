@@ -1,0 +1,47 @@
+########################################################################################################################################
+You are climbing a stair case. It takes n steps to reach to the top.
+
+Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+
+Note: Given n will be a positive integer.
+
+Example 1:
+
+Input: 2
+Output: 2
+Explanation: There are two ways to climb to the top.
+1. 1 step + 1 step
+2. 2 steps
+Example 2:
+
+Input: 3
+Output: 3
+Explanation: There are three ways to climb to the top.
+1. 1 step + 1 step + 1 step
+2. 1 step + 2 steps
+3. 2 steps + 1 step
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/climbing-stairs
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+
+########################################################################################################################################
+ * 解题思路：拆解[leetcode评论区]
+     * 1、当有N层楼梯时，爬到（N-1）有X种方法，爬到（N-2）有Y种方法；
+     * 2、那么爬到N层的方法有（N-1） + （N-2）种；
+     *      （N-1）层，只能选择1，到第N层；
+     *      （N-2）层，只能选择2，到第N层；若选择一层一层上，该方法与（N-1）中重合；
+     * 3、故，F（N）= F（N-1）+ F（N-2）；
+     * 4、将其转换为：斐波那契数列问题；
+     * 5、注意优化；
+其实主要是用到了动态规划的问题，每一次的结果只用到前两次的数据，时间复杂度和空间复杂度大大降低
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        if n <= 2:
+            return n
+        add_1 = 1
+        add_2 = 2
+        for i in range(3,n+1):
+            tmp = add_1 + add_2
+            add_1, add_2 = add_2, tmp
+        return tmp
