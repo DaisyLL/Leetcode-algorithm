@@ -1,0 +1,34 @@
+##########################################################################################################################################
+Implement int sqrt(int x).
+
+Compute and return the square root of x, where x is guaranteed to be a non-negative integer.
+
+Since the return type is an integer, the decimal digits are truncated and only the integer part of the result is returned.
+
+Example 1:
+
+Input: 4
+Output: 2
+Example 2:
+
+Input: 8
+Output: 2
+Explanation: The square root of 8 is 2.82842..., and since 
+             the decimal part is truncated, 2 is returned.
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/sqrtx
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+##########################################################################################################################################
+这道题如果使用函数sqrt 或者pow 是很简单的，但是如果不使用公式就比较难写，简单的用平方和减法很容易执行超时
+看了下评论很多人使用牛顿迭代法
+
+class Solution:
+    def mySqrt(self, x: int) -> int:
+        if x == 0 or x == 1:
+            return x
+        else:
+            r = x
+            while r * r > x:
+                r = (r + x /r) // 2
+            return int(r)
