@@ -1,0 +1,33 @@
+Given a non-empty array of integers, every element appears twice except for one. Find that single one.
+
+Note:
+
+Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory?
+
+Example 1:
+
+Input: [2,2,1]
+Output: 1
+Example 2:
+
+Input: [4,1,2,1,2]
+Output: 4
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/single-number
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+########################################################################################################################################
+不允许使用额外空间，且应该具有线性复杂度，使用异或
+任何数于0异或为任何数 0 ^ n => n
+相同的数异或为0: n ^ n => 0
+
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        a = 0
+        for n in nums:
+            a = a ^ n
+        return a
+也可以使用sum 函数，但效率不高
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        return sum(set(nums))*2 - sum(nums)
