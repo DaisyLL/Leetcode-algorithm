@@ -1,0 +1,26 @@
+Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
+
+Note: For the purpose of this problem, we define empty string as valid palindrome.
+
+Example 1:
+
+Input: "A man, a plan, a canal: Panama"
+Output: true
+Example 2:
+
+Input: "race a car"
+Output: false
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/valid-palindrome
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+#########################################################################################################################################
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+        e = ''.join([str(i) for i in s if re.match('([a-z])|([A-Z])|([0-9])',str(i))]).lower()
+        return e == e[::-1]
+可以使用正则匹配,也可以使用str 的自带函数isalnum
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+        s = ''.join(filter(str.isalnum,s)).lower()
+        return s==s[::-1]
