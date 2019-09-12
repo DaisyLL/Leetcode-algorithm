@@ -1,0 +1,29 @@
+Given a column title as appear in an Excel sheet, return its corresponding column number.
+
+For example:
+
+    A -> 1
+    B -> 2
+    C -> 3
+    ...
+    Z -> 26
+    AA -> 27
+    AB -> 28 
+    ...
+Example 1:
+
+Input: "A"
+Output: 1
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/excel-sheet-column-number
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+###################################################################################################################################
+class Solution:
+    def titleToNumber(self, s: str) -> int:
+        a = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+        l = len(s)
+        n = 0
+        for i in range(l):
+            n = n + pow(26,l-1-i) + a.index(s[i])*pow(26,l-1-i)
+        return n
