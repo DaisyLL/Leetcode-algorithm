@@ -1,0 +1,32 @@
+Write an algorithm to determine if a number is "happy".
+
+A happy number is a number defined by the following process: Starting with any positive integer, replace the number by the sum of the squares of its digits, and repeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1. Those numbers for which this process ends in 1 are happy numbers.
+
+Example: 
+
+Input: 19
+Output: true
+Explanation: 
+12 + 92 = 82
+82 + 22 = 68
+62 + 82 = 100
+12 + 02 + 02 = 1
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/happy-number
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+#####################################################################################################################################
+这道题最重要的是要找到returnfalse 的条件：n如果重复出现代表陷入了死循环
+class Solution(object):
+    def isHappy(self, n):
+        """
+        :type n: int
+        :rtype: bool
+        """
+        a = list()
+        while n not in a:
+            a.append(n)
+            n = sum([int(i) * int(i) for i in str(n)])
+            if n == 1:
+                return True
+        return False
