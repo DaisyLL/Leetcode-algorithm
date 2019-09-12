@@ -32,3 +32,15 @@ class Solution:
             while r * r > x:
                 r = (r + x /r) // 2
             return int(r)
+
+我自己不是很理解这个方式，自己用while 写也可以，只是效率不高
+class Solution(object):
+    def mySqrt(self, x):
+        """
+        :type x: int
+        :rtype: int
+        """
+        i = 0
+        while i * i <= x:
+            i += 1
+        return i - 1
