@@ -1,0 +1,52 @@
+Given an array of integers and an integer k, find out whether there are two distinct indices i and j in the array such that nums[i] = nums[j] and the absolute difference between i and j is at most k.
+
+Example 1:
+
+Input: nums = [1,2,3,1], k = 3
+Output: true
+Example 2:
+
+Input: nums = [1,0,1,1], k = 1
+Output: true
+Example 3:
+
+Input: nums = [1,2,3,1,2,3], k = 2
+Output: false
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/contains-duplicate-ii
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+######################################################################################################################################
+做算法题一定要考虑到肯定为错误的值先返回False 这样能够避免走多余的循环流程
+像下面这样写是OK的
+class Solution(object):
+    def containsNearbyDuplicate(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: bool
+        """
+        if len(set(nums))==len(nums):
+            return False
+        i = 0
+        while i < len(nums):
+            a = nums[i+1:i+1+k]
+            if nums[i] in a:
+                return True
+            i += 1
+        return False
+但是下面这样就是错误的 因为如果不存在重复值的话 就代表列表要被完全扫描一遍之后才能得到答案。容易超时
+class Solution(object):
+    def containsNearbyDuplicate(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: bool
+        """
+        i = 0
+        while i < len(nums):
+            a = nums[i+1:i+1+k]
+            if nums[i] in a:
+                return True
+            i += 1
+        return False
