@@ -44,3 +44,24 @@ class Solution(object):
         while i * i <= x:
             i += 1
         return i - 1
+和朋友讨论后 把牛顿迭代法和二分法结合讨论出一种新的方法，用时16ms
+class Solution(object):
+    def mySqrt(self, x):
+        """
+        :type x: int
+        :rtype: int
+        """
+        l = 1        ## 赋最小值为1 是为了考虑x=1 的情况, m 和prem 取值范围为|0-1|，因此会导致while 条件不满足推出循环返回0出错
+        r = x        
+        subr = 1     ## while 条件初始值，任意大于等于1的值都可以
+        m = (l + r) / 2   ## mid 二分法取中间值
+        while subr >= 1 or subr <= -1:      ## 循环条件  当预测中间值 和中间值的差小于1时结束循环
+            prem = m
+            remain = m * m - x    ## 缩小左右区间值
+            if remain > 0:
+                r = m
+            else:
+                l = m
+            m = (l + r) / 2
+            subr = m - prem
+        return m     ## 实际返回结果可能为小数，但接口已处理只保留整数位
